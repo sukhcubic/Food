@@ -56,7 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="10"
                         android:textSize="@dimen/recipe_publisher_text_size"
-                        android:textColor="@color/red"
+                        android:textColor="@color/colorAccent"
                         android:id="@+id/recipe_social_score"
                         android:gravity="center"/>
 
