@@ -1,4 +1,4 @@
-package com.example.food.rest;
+package com.example.food.network;
 
 import com.example.food.models.Recipe;
 import com.google.gson.annotations.Expose;
@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class RecipeSearchResponse {
+public class FoodSearchResponse {
     @SerializedName("count")
     @Expose()
     private int count;
@@ -25,7 +25,7 @@ public class RecipeSearchResponse {
 
     @Override
     public String toString() {
-        return "RecipeSearchResponse{" +
+        return "FoodSearchResponse{" +
                 "count=" + count +
                 ", recipes=" + recipes +
                 '}';

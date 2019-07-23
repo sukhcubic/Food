@@ -1,11 +1,11 @@
-package com.example.food.rest;
+package com.example.food.network;
 
 
 import com.example.food.models.Recipe;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class RecipeResponse {
+public class FoodResponse {
 
     @SerializedName("recipe")
     @Expose()
@@ -17,7 +17,7 @@ public class RecipeResponse {
 
     @Override
     public String toString() {
-        return "RecipeResponse{" +
+        return "FoodResponse{" +
                 "recipe=" + recipe +
                 '}';
     }
