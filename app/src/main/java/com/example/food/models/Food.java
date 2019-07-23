@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.util.Arrays;
 
-public class Recipe implements Parcelable {
+public class Food implements Parcelable {
 
     private String title;
     private String publisher;
@@ -14,8 +14,8 @@ public class Recipe implements Parcelable {
     private String image_url;
     private float social_rank;
 
-    public Recipe(String title, String publisher, String[] ingredients, String recipe_id,
-                  String image_url, float social_rank) {
+    public Food(String title, String publisher, String[] ingredients, String recipe_id,
+                String image_url, float social_rank) {
         this.title = title;
         this.publisher = publisher;
         this.ingredients = ingredients;
@@ -24,10 +24,10 @@ public class Recipe implements Parcelable {
         this.social_rank = social_rank;
     }
 
-    public Recipe() {
+    public Food() {
     }
 
-    protected Recipe(Parcel in) {
+    protected Food(Parcel in) {
         title = in.readString();
         publisher = in.readString();
         ingredients = in.createStringArray();
@@ -36,15 +36,15 @@ public class Recipe implements Parcelable {
         social_rank = in.readFloat();
     }
 
-    public static final Parcelable.Creator<Recipe> CREATOR = new Creator<Recipe>() {
+    public static final Parcelable.Creator<Food> CREATOR = new Creator<Food>() {
         @Override
-        public Recipe createFromParcel(Parcel in) {
-            return new Recipe(in);
+        public Food createFromParcel(Parcel in) {
+            return new Food(in);
         }
 
         @Override
-        public Recipe[] newArray(int size) {
-            return new Recipe[size];
+        public Food[] newArray(int size) {
+            return new Food[size];
         }
     };
 
@@ -98,7 +98,7 @@ public class Recipe implements Parcelable {
 
     @Override
     public String toString() {
-        return "Recipe{" +
+        return "Food{" +
                 "title='" + title + '\'' +
                 ", publisher='" + publisher + '\'' +
                 ", ingredients=" + Arrays.toString(ingredients) +

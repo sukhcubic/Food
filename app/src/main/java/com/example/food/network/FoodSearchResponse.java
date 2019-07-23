@@ -1,6 +1,6 @@
 package com.example.food.network;
 
-import com.example.food.models.Recipe;
+import com.example.food.models.Food;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -11,23 +11,23 @@ public class FoodSearchResponse {
     @Expose()
     private int count;
 
-    @SerializedName("recipes")
+    @SerializedName("foods")
     @Expose()
-    private List<Recipe> recipes;
+    private List<Food> foods;
 
     public int getCount() {
         return count;
     }
 
-    public List<Recipe> getRecipes() {
-        return recipes;
+    public List<Food> getFoods() {
+        return foods;
     }
 
     @Override
     public String toString() {
         return "FoodSearchResponse{" +
                 "count=" + count +
-                ", recipes=" + recipes +
+                ", foods=" + foods +
                 '}';
     }
 }
