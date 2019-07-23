@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.util.Log;
 import com.example.food.models.Food;
-import com.example.food.util.AppExecutors;
+import com.example.food.util.ExecutorServices;
 import com.example.food.util.Constants;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,9 +55,9 @@ public class FoodApiClient {
             mRetrieveRecipesRunnable = null;
         }
         mRetrieveRecipesRunnable = new RetrieveRecipesRunnable(query, pageNumber);
-        final Future handler = AppExecutors.getInstance().networkIO().submit(mRetrieveRecipesRunnable);
+        final Future handler = ExecutorServices.getInstance().networkIO().submit(mRetrieveRecipesRunnable);
 
-        AppExecutors.getInstance().networkIO().schedule(new Runnable() {
+        ExecutorServices.getInstance().networkIO().schedule(new Runnable() {
             @Override
             public void run() {
                 // let the user know its timed out
@@ -72,10 +72,10 @@ public class FoodApiClient {
         }
         mRetrieveRecipeRunnable = new RetrieveRecipeRunnable(recipeId);
 
-        final Future handler = AppExecutors.getInstance().networkIO().submit(mRetrieveRecipeRunnable);
+        final Future handler = ExecutorServices.getInstance().networkIO().submit(mRetrieveRecipeRunnable);
 
         mRecipeRequestTimeout.setValue(false);
-        AppExecutors.getInstance().networkIO().schedule(new Runnable() {
+        ExecutorServices.getInstance().networkIO().schedule(new Runnable() {
             @Override
             public void run() {
                 // let the user know it's timed out

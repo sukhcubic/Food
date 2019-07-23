@@ -3,12 +3,12 @@ package com.example.food.util;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
-public class AppExecutors {
-    private static AppExecutors instance;
+public class ExecutorServices {
+    private static ExecutorServices instance;
 
-    public static AppExecutors getInstance(){
+    public static ExecutorServices getInstance(){
         if(instance == null){
-            instance = new AppExecutors();
+            instance = new ExecutorServices();
         }
         return instance;
     }
