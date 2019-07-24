@@ -1,4 +1,4 @@
-package com.example.food.ui;
+package com.example.food.views;
 
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
