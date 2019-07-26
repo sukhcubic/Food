@@ -5,7 +5,6 @@ import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Observer;
 import android.support.annotation.Nullable;
-
 import com.example.food.models.Food;
 import com.example.food.network.FoodApiClient;
 
@@ -20,7 +19,7 @@ public class FoodMediator {
     private MutableLiveData<Boolean> mIsQueryExhausted = new MutableLiveData<>();
     private MediatorLiveData<List<Food>> mRecipes = new MediatorLiveData<>();
 
-        public static FoodMediator getInstance(){
+    public static FoodMediator getInstance(){
         if(instance == null){
             instance = new FoodMediator();
         }
@@ -38,13 +37,27 @@ public class FoodMediator {
             @Override
             public void onChanged(@Nullable List<Food> foods) {
                 if(foods != null){
-
+                    mRecipes.setValue(foods);
+                    doneQuery(foods);
                 }else{
-
                 }
             }
         });
+    }
 
+    private void doneQuery(List<Food> list){
+        if(list != null){
+            if (list.size() % 30 != 0) {
+                mIsQueryExhausted.setValue(true);
+            }
+        }
+        else{
+            mIsQueryExhausted.setValue(true);
+        }
+    }
+
+    public LiveData<Boolean> isQueryExhausted(){
+        return mIsQueryExhausted;
     }
 
     public void searchNextPage(){
@@ -72,6 +85,7 @@ public class FoodMediator {
         mIsQueryExhausted.setValue(false);
         apiClient.searchRecipesApi(query, pageNumber);
     }
+
     public void cancelRequest(){
         apiClient.cancelRequest();
     }

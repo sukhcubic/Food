@@ -14,7 +14,6 @@ public class Connectivity extends LiveData<Network> {
     private ConnectivityManager.NetworkCallback listener = new ConnectivityManager.NetworkCallback() {
         @Override
         public void onAvailable(Network network){
-            //this part runs on background thread so use postValue
             postValue(network);
         }
         @Override
@@ -24,7 +23,6 @@ public class Connectivity extends LiveData<Network> {
     };
 
     public Connectivity(Context context) {
-        //get connectivity system service
         connectivityManager =
                 (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
     }

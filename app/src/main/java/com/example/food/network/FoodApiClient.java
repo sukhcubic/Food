@@ -20,9 +20,9 @@ public class FoodApiClient {
     private static final String TAG = "FoodApiClient";
 
     private static FoodApiClient instance;
-    private MutableLiveData<List<Food>> food;
+    private MutableLiveData<List<Food>> foods;
     private RetrieveRecipesRunnable mRetrieveRecipesRunnable;
-    private MutableLiveData<Food> foods;
+    private MutableLiveData<Food> food;
     private RetrieveRecipeRunnable mRetrieveRecipeRunnable;
     private MutableLiveData<Boolean> mRecipeRequestTimeout = new MutableLiveData<>();
 
@@ -34,16 +34,16 @@ public class FoodApiClient {
     }
 
     private FoodApiClient(){
-        food = new MutableLiveData<>();
         foods = new MutableLiveData<>();
+        food = new MutableLiveData<>();
     }
 
     public LiveData<List<Food>> getRecipes(){
-        return food;
+        return foods;
     }
 
     public LiveData<Food> getRecipe(){
-        return foods;
+        return food;
     }
 
     public LiveData<Boolean> isRecipeRequestTimedOut(){
@@ -60,7 +60,6 @@ public class FoodApiClient {
         ExecutorServices.getInstance().networkIO().schedule(new Runnable() {
             @Override
             public void run() {
-                // let the user know its timed out
                 handler.cancel(true);
             }
         }, NETWORK_TIMEOUT, TimeUnit.MILLISECONDS);
@@ -108,12 +107,12 @@ public class FoodApiClient {
                 if(response.code() == 200){
                     List<Food> list = new ArrayList<>(((FoodSearchResponse)response.body()).getFoods());
                     if(pageNumber == 1){
-                        food.postValue(list);
+                        foods.postValue(list);
                     }
                     else{
-                        List<Food> currentRecipes = food.getValue();
+                        List<Food> currentRecipes = foods.getValue();
                         currentRecipes.addAll(list);
-                        food.postValue(currentRecipes);
+                        foods.postValue(currentRecipes);
                     }
                 }
                 else{
@@ -161,7 +160,7 @@ public class FoodApiClient {
                 }
                 if(response.code() == 200){
                     Food mFood = ((FoodResponse)response.body()).getFood();
-                    food.postValue((List<Food>) mFood);
+                    foods.postValue((List<Food>) mFood);
                 }
                 else{
                     String error = response.errorBody().string();
